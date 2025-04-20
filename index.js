@@ -1,12 +1,17 @@
 const express = require("express");
-const rootRouter = require("./routes/index")
+const rootRouter = require("./routes/index");
 const cors = require("cors");
 
 const app = express();
 
-app.use(cors())
-app.use(express.json())
-app.use('/api/v1',rootRouter);
+app.use(cors());
+app.use(express.json());
+app.use('/api/v1', rootRouter);
+
+// Add a route for the root path
+app.get('/', (req, res) => {
+    res.send("Welcome to the PayKaro API!");
+});
 
 const port = process.env.PORT || 3000;
 
