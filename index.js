@@ -6,19 +6,20 @@ const app = express();
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://pay-karo-frontend-navy.vercel.app/"
-  ];
+    "https://pay-karo-frontend-navy.vercel.app",
+    "https://pay-karo-backend-rho.vercel.app" // Add backend deployment URL
+];
 
-  app.use(cors({
+app.use(cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
     },
-    credentials: true
-  }));
+    credentials: true // Ensure credentials are allowed
+}));
 
 app.use(express.json());
 app.use('/api/v1', rootRouter);
